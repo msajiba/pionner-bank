@@ -40,13 +40,13 @@
             <div class="col-md-4">
                 <div class="withdraw status">
                     <h5>Withdraw</h5>
-                    <h2> $ 00</h2>
+                    <h2> $ <span id="currentWithdraw">00</span></h2>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="balance status">
                     <h5>Balance</h5>
-                    <h2>$ 1240</h2>
+                    <h2>$ <span id="currentBalance"> 1240</span></h2>
                 </div>
             </div>
         </div>
@@ -64,9 +64,10 @@
             <div class="col-md-6">
                 <div id="submit-area">
                     <h4> Withdraw </h4>
-                    <input type="text" class="form-control" placeholder="$ amount you want to withdraw">
+                    <input id="withdrawAmount" type="text" class="form-control"
+                        placeholder="$ amount you want to withdraw">
                     <br>
-                    <button class="btn btn-success"> Withdraw </button>
+                    <button id="addWithdraw" class="btn btn-success"> Withdraw </button>
                 </div>
             </div>
         </div>
@@ -80,17 +81,41 @@
             document.getElementById('login-area').style.display = "none";
             document.getElementById('transaction-area').style.display = "block";
         });
+
         // deposit button event handle
         document.getElementById("addDeposit").addEventListener("click", function () {
             var depositAmount = document.getElementById("depositAmount").value;
             var depositAmountNumber = parseFloat(depositAmount);
 
-            var currentDeposit = document.getElementById('currentDeposit').innerText;
-            var currentDepositNumber = parseFloat(currentDeposit);
-            var totalDeposit = depositAmountNumber + currentDepositNumber;
+            addAmount("currentDeposit", depositAmountNumber);
+            addAmount("currentBalance", depositAmountNumber);
 
-            document.getElementById("currentDeposit").innerText = totalDeposit;
             document.getElementById("depositAmount").value = "";
+        });
+
+
+        function addAmount(id, depositAmountNumber) {
+            var current = document.getElementById(id).innerText;
+            var currentNumber = parseFloat(current);
+            var totalAmount = currentNumber + depositAmountNumber;
+            document.getElementById(id).innerText = totalAmount;
+        };
+
+        // withdraw button event handle
+        document.getElementById("addWithdraw").addEventListener("click", function () {
+            var withdrawAmount = document.getElementById("withdrawAmount").value;
+            var withdrawAmountNumber = parseFloat(withdrawAmount);
+
+            var currentWithdraw = document.getElementById("currentWithdraw").innerText;
+            var currentWithdrawNumber = parseFloat(currentWithdraw);
+            var totalWithdraw = currentWithdrawNumber + withdrawAmountNumber;
+            document.getElementById("currentWithdraw").innerText = totalWithdraw;
+
+            addAmount("currentBalance", -1 * withdrawAmountNumber);
+
+            document.getElementById("withdrawAmount").value = "";
+
+
         });
     </script>
 </body>
