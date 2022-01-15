@@ -111,6 +111,8 @@
             var totalWithdraw = currentWithdrawNumber + withdrawAmountNumber;
             document.getElementById("currentWithdraw").innerText = totalWithdraw;
 
+            addAmount("currentBalance", -1 * withdrawAmountNumber);
+
             document.getElementById("withdrawAmount").value = "";
 
 
