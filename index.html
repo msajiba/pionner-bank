@@ -93,30 +93,25 @@
             document.getElementById("depositAmount").value = "";
         });
 
+        // withdraw button event handle
+        document.getElementById("addWithdraw").addEventListener("click", function () {
+            var withdrawAmount = document.getElementById("withdrawAmount").value;
+            var withdrawAmountNumber = parseFloat(withdrawAmount);
 
+            addAmount("currentWithdraw",withdrawAmountNumber )
+            addAmount("currentBalance", -1 * withdrawAmountNumber);
+
+            document.getElementById("withdrawAmount").value = "";
+        });
+
+        // withdraw and deposit both function 
+        
         function addAmount(id, depositAmountNumber) {
             var current = document.getElementById(id).innerText;
             var currentNumber = parseFloat(current);
             var totalAmount = currentNumber + depositAmountNumber;
             document.getElementById(id).innerText = totalAmount;
         };
-
-        // withdraw button event handle
-        document.getElementById("addWithdraw").addEventListener("click", function () {
-            var withdrawAmount = document.getElementById("withdrawAmount").value;
-            var withdrawAmountNumber = parseFloat(withdrawAmount);
-
-            var currentWithdraw = document.getElementById("currentWithdraw").innerText;
-            var currentWithdrawNumber = parseFloat(currentWithdraw);
-            var totalWithdraw = currentWithdrawNumber + withdrawAmountNumber;
-            document.getElementById("currentWithdraw").innerText = totalWithdraw;
-
-            addAmount("currentBalance", -1 * withdrawAmountNumber);
-
-            document.getElementById("withdrawAmount").value = "";
-
-
-        });
     </script>
 </body>
 
